@@ -1,0 +1,76 @@
+<div class="centered-container">
+  <div class="form-title">
+    <span class="form-title-text">Inscription</span>
+  </div>
+  <mat-vertical-stepper [linear]="true" #stepper>
+    <!-- Étape 1: Entreprise -->
+    <mat-step [stepControl]="entrepriseForm">
+      <form [formGroup]="entrepriseForm">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Informations de l'Entreprise</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field appearance="fill">
+              <mat-label>Nom de l'entreprise</mat-label>
+              <input matInput formControlName="Nom">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Description (Optionnelle)</mat-label>
+              <textarea matInput formControlName="Description"></textarea>
+            </mat-form-field>
+          </mat-card-content>
+        </mat-card>
+        <button [disabled]="entrepriseForm.invalid" mat-button matStepperNext>Suivant</button>
+      </form>
+    </mat-step>
+
+    <!-- Étape 2: Abonnement -->
+    <mat-step [stepControl]="abonnementForm">
+      <form [formGroup]="abonnementForm">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Type d'Abonnement</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-radio-group formControlName="type">
+              <mat-radio-button value="freemium">Freemium</mat-radio-button>
+              <mat-radio-button value="premium">Premium</mat-radio-button>
+            </mat-radio-group>
+            <p>Date de début : {{ abonnementForm.get('Date_Debut')?.value | date }}</p>
+            <p>Date de fin : {{ abonnementForm.get('Date_Fin')?.value | date }}</p>
+          </mat-card-content>
+        </mat-card>
+        <button mat-button matStepperPrevious>Précédent</button>
+        <button [disabled]="abonnementForm.invalid" mat-button matStepperNext>Suivant</button>
+      </form>
+    </mat-step>
+
+    <!-- Étape 3: Utilisateur -->
+    <mat-step [stepControl]="utilisateurForm">
+      <form [formGroup]="utilisateurForm" (ngSubmit)="onSubmit()">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Informations de Connexion</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field appearance="fill">
+              <mat-label>Nom</mat-label>
+              <input matInput formControlName="Nom">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Login (Email)</mat-label>
+              <input matInput formControlName="Login">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Mot de passe</mat-label>
+              <input matInput type="password" formControlName="MotDePasse">
+            </mat-form-field>
+          </mat-card-content>
+        </mat-card>
+        <button mat-button matStepperPrevious>Précédent</button>
+        <button [disabled]="inscriptionForm.invalid" mat-button class="inscrire-btn" type="submit">S'inscrire</button>
+      </form>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>

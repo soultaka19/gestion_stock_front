@@ -1,0 +1,109 @@
+/* Couleur primaire de l'application */
+$primary-color: #FF9F1C;
+
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  //margin-top: 32px;
+  height: 100vh;
+}
+/* Styles pour le Stepper */
+mat-vertical-stepper {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 24px;
+  //min-height: 100vh;
+}
+
+/* Styles pour les titres et les en-têtes du Stepper */
+mat-step-header {
+  background-color: $primary-color;
+  color: white;
+}
+
+/* Styles pour les MatCard */
+mat-card {
+  margin-bottom: 20px;
+}
+
+/* Styles pour les champs de formulaire */
+mat-form-field {
+  width: 100%; /* Pleine largeur */
+}
+
+/* Style pour le titre du formulaire */
+.form-title {
+  font-size: 36px;
+  text-align: center;
+  color: $primary-color;
+}
+
+/* Personnalisation du bouton "S'inscrire" */
+button.inscrire-btn {
+  background-color: $primary-color; /* Couleur primaire de l'application */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+  float: right;
+
+  &:hover {
+    background-color: darken($primary-color, 10%); /* Assombrir la couleur au survol */
+  }
+}
+
+/* Placement des boutons "Suivant" et "Précédent" */
+button[matStepperNext] {
+  float: right; /* Bouton Suivant à la fin */
+  background-color: $primary-color;
+  color: white;
+}
+
+button[matStepperPrevious] {
+  float: left; /* Bouton Précédent au début */
+}
+
+@media (max-width: 800px) {
+  //adapte le contenu pour les petits écrans
+  .centered-container {
+    margin-top: 0;
+  }
+  //adapte les formulaires pour les petits écrans
+  mat-card {
+    width: 100%;
+    max-width: 100%;
+  }
+  //adapte les titres pour les petits écrans: le titre doit se placer en haut de la page
+  .form-title {
+    font-size: 24px;
+  }
+  .form-title {
+    font-size: 24px;
+  }
+  //adapte les boutons pour les petits écrans
+  button.inscrire-btn {
+    width: 100%;
+  }
+  //adaote les champs de formulaire pour les petits écrans
+  mat-form-field {
+    width: 100%;
+    max-width: 100%;
+  }
+  //adapte le stepper pour les petits écrans
+  mat-vertical-stepper {
+    width: 100%;
+    max-width: 100%;
+  }
+  /* Pour les petits écrans, on affiche les boutons en dessous du formulaire */
+  button[matStepperNext],
+  button[matStepperPrevious] {
+    float: none;
+    width: 100%;
+  }
+}
