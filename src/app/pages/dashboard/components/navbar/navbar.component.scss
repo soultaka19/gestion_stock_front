@@ -37,3 +37,41 @@ button.mat-icon-button.example-icon:hover {
   //ajoute une marge en haut et en bas
   margin-top: -4px;
 }
+
+/* Styles existants */
+/* ... vos styles actuels ... */
+
+/* Responsive Design - Tablettes */
+@media (max-width: 768px) {
+  .user-info {
+    display: none;
+    //margin-top: 8px;
+  }
+  .user-section {
+    margin-right: 0;
+    gap: 0;
+  }
+  //rapprocher l'icone persone et la fleche
+  .person {
+    margin-right: -20px;
+  }
+}
+
+/* Responsive Design - Téléphones Mobiles */
+@media (max-width: 480px) {
+  .user-info {
+    display: none;
+    //margin-top: 8px;
+  }
+  .user-section {
+    margin-right: 0;
+    gap: 0;
+  }
+  //rapprocher l'icone persone et la fleche
+  .person {
+    margin-right: -20px;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+}

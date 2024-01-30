@@ -2,7 +2,7 @@
   height: 100%;
 }
 .sidenav {
-  padding-left: 10px;
+  //padding-left: 10px;
   width: 235px;
   //background-color: #FFBF69;
   background-color: #FF9F1C;
@@ -22,12 +22,21 @@
   margin-right: 15px; /* Ajustez l'espace selon vos besoins */
 }
 
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px; /* Ajustez l'espace selon vos besoins */
+  //definie moi la taille qui va contenir le logo
+  height: 125px;
+
+}
+
 
 .logo {
   width: 100%; /* Le logo occupe toute la largeur du container */
-  height: auto; /* Maintient l'aspect ratio */
+  height: 100%; /* Maintient l'aspect ratio */
   max-width: 100%; /* Prévient le dépassement */
-  max-height: 76px; /* Hauteur maximale, ajustez selon vos besoins */
+  //max-height: 76px; /* Hauteur maximale, ajustez selon vos besoins */
 }
 .container{
   margin-left: 28px;
@@ -38,3 +47,8 @@
 //   margin-top: 10px;
 
 // }
+@media (max-width: 768px) { /* Taille d'écran pour tablettes et moins */
+  .sidenav {
+    display: none;
+  }
+}
