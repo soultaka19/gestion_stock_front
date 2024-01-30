@@ -9,6 +9,9 @@
   box-shadow: 3px 0 6px rgba(0,0,0,.24);
 
 }
+mat-nav-list{
+  padding-left: 10px;
+}
 
 .active-link {
   color: #0A58CA;
@@ -27,7 +30,9 @@
   align-items: center;
   margin-bottom: 8px; /* Ajustez l'espace selon vos besoins */
   //definie moi la taille qui va contenir le logo
-  height: 125px;
+  height: 96px;
+  //je veux que le container du logo soit colle au bord gauche
+  margin-left: 0px;
 
 }
 
@@ -48,7 +53,5 @@
 
 // }
 @media (max-width: 768px) { /* Taille d'écran pour tablettes et moins */
-  .sidenav {
-    display: none;
-  }
+
 }

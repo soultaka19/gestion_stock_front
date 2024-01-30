@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatButtonModule} from '@angular/material/button';
-import {  MatIconModule } from '@angular/material/icon';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { AfterViewInit, Component, OnDestroy, ViewChild, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { SidebarService } from '../../services/sidebar.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,11 +22,26 @@ import { RouterModule, RouterOutlet } from '@angular/router';
     MatExpansionModule,
     NavbarComponent,
     RouterOutlet,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {
+export class SidebarComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+  private sidebarService = inject(SidebarService);
+  toggleSubscrition!: Subscription;
 
+  ngAfterViewInit(): void {
+    this.toggleSubscrition = this.sidebarService.sidebarToggle$.subscribe((open) => {
+        setTimeout(() => {
+          this.sidenav.opened = open;
+        });
+    });
+  }
+
+
+  ngOnDestroy(): void {
+    this.toggleSubscrition.unsubscribe();
+  }
 }
