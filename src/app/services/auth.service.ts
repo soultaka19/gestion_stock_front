@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, catchError, switchMap, tap, throwError } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+import { BehaviorSubject, Observable, catchError, switchMap, tap, throwError } from 'rxjs';
 import { Abonnement } from '../core/models/abonnement.model';
 import { Entreprise } from '../core/models/entreprise.model';
 import { Utilisateur } from '../core/models/utilisateur.model';
@@ -11,58 +12,101 @@ import { Utilisateur } from '../core/models/utilisateur.model';
 export class AuthService {
   private apiUrl = 'http://localhost/gestion_stock/taf/';
 
-  // private currentUserSubject: BehaviorSubject<Utilisateur>;
-  // public currentUser: Observable<Utilisateur>;
+  private currentUserSubject!: BehaviorSubject<Utilisateur>;
+  public currentUser!: Observable<Utilisateur>;
 
   private http = inject(HttpClient);
   constructor() {
-    // const currentUser = localStorage.getItem('currentUser');
-    // this.currentUserSubject = new BehaviorSubject<Utilisateur>(
-    //   currentUser ? JSON.parse(currentUser) : null
-    // );
-    // this.currentUser = this.currentUserSubject.asObservable();
-    //this.currentUserSubject = new BehaviorSubject<Utilisateur>(JSON.parse(localStorage.getItem('currentUser')))
+    const currentUser = localStorage?.getItem('user');
+    this.currentUserSubject = new BehaviorSubject<Utilisateur>(
+      currentUser ? JSON.parse(currentUser) : null
+    );
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  // public get currentUserValue(): Utilisateur {
-  //   return this.currentUserSubject.value;
-  // }
+  public get currentUserValue(): Utilisateur {
+    return this.currentUserSubject.value;
+  }
 
   inscription(utilisateur: Utilisateur,entreprise: Entreprise,abonnement: Abonnement ): Observable<Utilisateur> {
-    return this.http.post<Entreprise>(`${this.apiUrl}entreprise/add`,entreprise).pipe(
-      tap((entrepriseAjoutee: Entreprise) => {
-        console.log('Reponse du backend pour l\'ajout de l\'entreprise', entrepriseAjoutee);
-      },
-      catchError((err) => {
-        console.error('Une ereeur esr survenue lors de l\'ajout d\'entreprise', err);
-        return throwError(err);
-      })),
-      switchMap((entrepriseAjoutee: any) => {
-        if (entrepriseAjoutee.status && entrepriseAjoutee.data) {
-          utilisateur.ID_Entreprise = entrepriseAjoutee.data[`id_entreprise`];
-          utilisateur.ID_Abonnement = abonnement.ID_Abonnement;
-          return this.http
-            .post<Utilisateur>(`${this.apiUrl}utilisateur/add`, utilisateur)
-            .pipe(
-              tap((utilisateurAjoute: Utilisateur) => {
-                console.log(
-                  "Reponse du backend pour l'inscription de l'utilisateur",
-                  utilisateurAjoute
-                );
-              }),
-              catchError((err) => {
-                console.error(
-                  "Une ereeur esr survenue lors de l'inscription",
-                  err
-                );
-                return throwError(err);
-              })
+    return this.http
+      .post<Entreprise>(`${this.apiUrl}entreprise/add`, entreprise)
+      .pipe(
+        tap(
+          (entrepriseAjoutee: Entreprise) => {
+            console.log(
+              "Reponse du backend pour l'ajout de l'entreprise",
+              entrepriseAjoutee
             );
-        } else {
-          return throwError(new Error('Reponse du backend invalide'));
-        }
-      })
-    );
+          },
+          catchError((err) => {
+            console.error(
+              "Une ereeur esr survenue lors de l'ajout d'entreprise",
+              err
+            );
+            return throwError(err);
+          })
+        ),
+        switchMap((entrepriseAjoutee: any) => {
+          if (entrepriseAjoutee.status && entrepriseAjoutee.data) {
+            utilisateur.ID_Entreprise = entrepriseAjoutee.data[`id_entreprise`];
+            utilisateur.ID_Abonnement = abonnement.ID_Abonnement;
+            return this.http
+              .post<Utilisateur>(`${this.apiUrl}utilisateur/add`, utilisateur)
+              .pipe(
+                tap((utilisateurAjoute: Utilisateur) => {
+                  console.log(
+                    "Reponse du backend pour l'inscription de l'utilisateur",
+                    utilisateurAjoute
+                  );
+                }),
+                catchError((err) => {
+                  console.error(
+                    "Une ereeur esr survenue lors de l'inscription",
+                    err
+                  );
+                  return throwError(err);
+                })
+              );
+          } else {
+            return throwError(new Error('Reponse du backend invalide'));
+          }
+        })
+      );
   }
 
+  login(Login: string, MotDePasse: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}taf_auth/auth`, {Login: Login,MotDePasse: MotDePasse,})
+      .pipe(
+        tap((reponse: any) => {
+          console.log('Reponse du backend pour la connexion', reponse);
+          if (reponse.status && reponse.data) {
+            //stocker le token JWT dans le local storage
+            localStorage.setItem('token', reponse.data);
+
+            //decoder le token JWT pour recuperer les informations de l'utilisateur
+            const decodedToken = jwtDecode(reponse.data);
+            console.log("Informations de l'utilisateur", decodedToken);
+
+            //stocker les informations de l'utilisateur dans le local storage
+            localStorage.setItem(
+              'user',
+              JSON.stringify((decodedToken as any)['taf_data'])
+            );
+            this.currentUserSubject.next((decodedToken as any)['taf_data']);
+          }
+        }),
+        catchError((err) => {
+          console.error('Une ereeur esr survenue lors de la connexion', err);
+          return throwError(err);
+        })
+      );
+  }
+
+  //implementation d'une methode isLogged qui permet de verifier si l'utilisateur est connecte
+  isLogged(): boolean {
+    const token = localStorage.getItem('token');
+    // Ajoutez ici la logique pour vérifier la validité du token si nécessaire
+    return !!token;
+  }
 }

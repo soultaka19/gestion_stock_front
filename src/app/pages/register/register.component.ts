@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input'; // Add this import
 import { MatRadioModule } from '@angular/material/radio';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router } from '@angular/router';
 import { Entreprise } from '../../core/models/entreprise.model';
 import { AuthService } from '../../services/auth.service';
 
@@ -35,6 +36,7 @@ export class RegisterComponent implements OnInit {
 
   formBuilder = inject(FormBuilder);
   authService = inject(AuthService);
+  route = inject(Router);
 
   ngOnInit(): void {
     this.initInscriptionForm();
@@ -83,6 +85,7 @@ export class RegisterComponent implements OnInit {
         if (reponse.status) {
           //vider le formulaire
           this.inscriptionForm.reset();
+          this.route.navigate(['/login']);
           console.log('Inscription reussie', reponse);
         } else {
           console.error('Erreur d\'inscription:', reponse);
