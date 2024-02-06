@@ -1,1 +1,47 @@
-<p>product-list works!</p>
+<div class="mat-elevation-z8 mt-2 p-1" >
+<!--ajouter un bouton d'action pour un nouveau produit-->
+<div class="row">
+  <div class="col-md-12 d-flex justify-content-end mr-2">
+    <button mat-raised-button color="primary" (click)="openDialog()" >Ajouter un produit</button>
+  </div>
+</div>
+  <table mat-table [dataSource]="dataSource" >
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nom">
+    <th mat-header-cell *matHeaderCellDef> Nom </th>
+    <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="prixUnitaire">
+    <th mat-header-cell *matHeaderCellDef> prixUnitaire </th>
+    <td mat-cell *matCellDef="let element"> {{element.prixUnitaire}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="quantite">
+    <th mat-header-cell *matHeaderCellDef> Quantite </th>
+    <td mat-cell *matCellDef="let element"> {{element.quantite}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fournisseur">
+    <th mat-header-cell *matHeaderCellDef> Fournisseur </th>
+    <td mat-cell *matCellDef="let element"> {{element.fournisseur}} </td> 
+  </ng-container>
+
+  <ng-container matColumnDef="niveauStock">
+    <th mat-header-cell *matHeaderCellDef>niveauStock </th>
+    <td mat-cell *matCellDef="let element"> {{element.niveauStock}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>

@@ -1,1 +1,26 @@
-<p>add-product works!</p>
+<h2 mat-dialog-title>Ajout de produit</h2>
+<mat-dialog-content class="dialog-content">
+  <!--formulaire reactive pour les champs Nom, Description, PrixUnitaire, ID_Fournissuer avec angular material-->
+  <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="Nom" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Description (Optionnelle)</mat-label>
+      <textarea matInput formControlName="Description"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Prix Unitaire</mat-label>
+      <input matInput formControlName="PrixUnitaire" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>ID Fournisseur</mat-label>
+      <input value="1" matInput formControlName="ID_Fournisseur" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Ajouter</button>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
