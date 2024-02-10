@@ -24,17 +24,10 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './add-product.component.scss',
 })
 export class AddProductComponent implements OnInit {
-  private apiUrl = 'http://localhost/gestion_stock/taf/';
-
   //declarer le formulaire
   addProductForm!: FormGroup;
   formBuilder = inject(FormBuilder);
   http = inject(HttpClient);
-  onSubmit() {
-    console.log(this.addProductForm.value);
-    this.addProduct();
-  }
-  //initialiser le formulaire
   ngOnInit() {
     this.addProductForm = this.formBuilder.group({
       Nom: ['', Validators.required],
@@ -43,17 +36,9 @@ export class AddProductComponent implements OnInit {
       ID_Fournisseur: [''],
     });
   }
-
-  //ajouter le produit
-  addProduct() {
+  
+  onSubmit() {
     console.log(this.addProductForm.value);
-    this.http.post(`${this.apiUrl}produit/add`, this.addProductForm.value).subscribe(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
   }
+
 }
