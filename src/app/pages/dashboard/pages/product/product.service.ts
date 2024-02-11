@@ -13,7 +13,7 @@ export class ProductService {
 
   // Create a new product
   createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product).pipe(
+    return this.http.post<Product>(`${this.apiUrl}produit/add`, product).pipe(
       catchError(this.handleError)
     );
   }

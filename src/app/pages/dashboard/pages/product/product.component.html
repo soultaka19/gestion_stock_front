@@ -44,7 +44,7 @@
   <!--mat tabs module-->
   <mat-tab-group animationDuration="0ms" class="mt-3">
     <mat-tab label="Produits">
-      <ng-container *ngIf="les_produits | async as products">
+      <ng-container *ngIf="les_produits$ | async as products">
         <app-product-list [products]="products" (addProduct)="openDialog()" />
       </ng-container>
     </mat-tab>
