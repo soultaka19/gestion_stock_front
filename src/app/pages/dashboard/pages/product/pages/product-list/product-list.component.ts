@@ -22,7 +22,6 @@ import { AddProductComponent } from '../add-product/add-product.component';
 
 
 export class ProductListComponent  {
-  //products = input.re<Product[]>([]);
   //@Input({ required: true }) products!: Product[];
   @Output() addProduct = new EventEmitter<string>();
 
