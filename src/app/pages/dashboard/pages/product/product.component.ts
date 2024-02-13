@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,6 +34,9 @@ export class ProductComponent {
     tap((data) => console.log("reponse de l'api produit", data)),
     map((data) => data.data)
   );
+  
+  products = toSignal(this.les_produits$, {initialValue: []});
+
   openDialog() {
     const dialogRef = this.dialog.open(AddProductComponent);
 

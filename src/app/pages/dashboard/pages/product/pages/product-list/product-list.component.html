@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8 mt-3 p-1" >
-<div class="col-md-12 d-flex justify-content-end mr-2">
+  <div class="col-md-12 d-flex justify-content-end mr-2">
     <button mat-raised-button color="primary" (click)="onAddProduct()" >Ajouter un produit</button>
   </div>
 <!--afficher les produits dans une table bootstrap-->
@@ -14,14 +14,14 @@
     </tr>
   </thead>
   <tbody>
-    @for (item of products; track $index) {
+    <!-- @for (product of products; track $index) {
       <tr>
         <th scope="row">{{$index + 1}}</th>
-        <td>{{item.Nom}}</td>
-        <td>{{item.PrixUnitaire}}</td>
-        <td>{{item.ID_Fournisseur}}</td>
+        <td>{{ product.Nom }}</td>
+        <td>{{ product.PrixUnitaire }}</td>
+        <td>{{ product.ID_Fournisseur }}</td>
       </tr>
-    }
+    } -->
   </tbody>
 </table>
 

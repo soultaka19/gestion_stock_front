@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { Product } from '../../models/product.model';
 import { AddProductComponent } from '../add-product/add-product.component';
 
 
@@ -23,8 +22,11 @@ import { AddProductComponent } from '../add-product/add-product.component';
 
 
 export class ProductListComponent  {
-  @Input({ required: true }) products!: Product[];
+  //products = input.re<Product[]>([]);
+  //@Input({ required: true }) products!: Product[];
   @Output() addProduct = new EventEmitter<string>();
+
+
 
   onAddProduct() {
     this.addProduct.emit('add');
