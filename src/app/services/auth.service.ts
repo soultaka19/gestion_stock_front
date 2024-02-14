@@ -12,19 +12,18 @@ import { Utilisateur } from '../core/models/utilisateur.model';
 export class AuthService {
   private apiUrl = 'http://localhost/gestion_stock/taf/';
 
-  private currentUserSubject!: BehaviorSubject<Utilisateur>;
-  public currentUser!: Observable<Utilisateur>;
+  private token: string | null = null;
+
+  private currentUserSubject!: BehaviorSubject<Utilisateur | null>;
+  public currentUser!: Observable<Utilisateur | null>;
 
   private http = inject(HttpClient);
   constructor() {
-    const currentUser = localStorage?.getItem('user');
-    this.currentUserSubject = new BehaviorSubject<Utilisateur>(
-      currentUser ? JSON.parse(currentUser) : null
-    );
+    this.currentUserSubject = new BehaviorSubject<Utilisateur | null>(null);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): Utilisateur {
+  public get currentUserValue(): Utilisateur | null {
     return this.currentUserSubject.value;
   }
 
@@ -82,17 +81,17 @@ export class AuthService {
           console.log('Reponse du backend pour la connexion', reponse);
           if (reponse.status && reponse.data) {
             //stocker le token JWT dans le local storage
-            localStorage.setItem('token', reponse.data);
+            this.token = reponse.data;
 
             //decoder le token JWT pour recuperer les informations de l'utilisateur
             const decodedToken = jwtDecode(reponse.data);
-            console.log("Informations de l'utilisateur", decodedToken);
+            console.log("Informations de l'utilisateur et l'etat du token", decodedToken);
 
             //stocker les informations de l'utilisateur dans le local storage
-            localStorage.setItem(
-              'user',
-              JSON.stringify((decodedToken as any)['taf_data'])
-            );
+            // localStorage.setItem(
+            //   'user',
+            //   JSON.stringify((decodedToken as any)['taf_data'])
+            // );
             this.currentUserSubject.next((decodedToken as any)['taf_data']);
           }
         }),
@@ -105,8 +104,7 @@ export class AuthService {
 
   //implementation d'une methode isLogged qui permet de verifier si l'utilisateur est connecte
   isLogged(): boolean {
-    const token = localStorage.getItem('token');
     // Ajoutez ici la logique pour vérifier la validité du token si nécessaire
-    return !!token;
+    return !!this.token;
   }
 }

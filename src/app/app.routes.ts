@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { dasboardGuard } from './pages/dashboard/dasboard.guard';
 
 export const routes: Routes = [
   {
@@ -22,7 +21,7 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    canActivate: [dasboardGuard],
+    //canActivate: [dasboardGuard],
     loadChildren: () =>
       import('./pages/dashboard/dashboard.routes').then(
         (m) => m.dashboardRoutes
