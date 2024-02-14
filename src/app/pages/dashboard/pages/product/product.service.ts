@@ -26,7 +26,8 @@ export class ProductService {
       );
   }
 
-  // Get a product by ID
+
+
   getProductById(productId: number): Observable<Product> {
     const url = `${this.apiUrl}/${productId}`;
     return this.http.get<Product>(url).pipe(

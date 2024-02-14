@@ -14,14 +14,14 @@
     </tr>
   </thead>
   <tbody>
-    <!-- @for (product of products; track $index) {
+    @for (product of products(); track $index) {
       <tr>
         <th scope="row">{{$index + 1}}</th>
         <td>{{ product.Nom }}</td>
         <td>{{ product.PrixUnitaire }}</td>
         <td>{{ product.ID_Fournisseur }}</td>
       </tr>
-    } -->
+    }
   </tbody>
 </table>
 
