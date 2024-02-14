@@ -1,10 +1,40 @@
-<div class="mat-elevation-z8 mt-3 p-1" >
+<div class="mat-elevation-z8 mt-3 p-1">
   <div class="col-md-12 d-flex justify-content-end mr-2">
-    <button mat-raised-button color="primary" (click)="onAddProduct()" >Ajouter un produit</button>
+    <button mat-raised-button color="primary" (click)="onAddProduct()">
+      Ajouter un produit
+    </button>
   </div>
-<!--afficher les produits dans une table bootstrap-->
-<h1>Gestion des produits</h1>
-<table class="table">
+  <!--afficher les produits dans une table bootstrap-->
+  <h1>Gestion des produits</h1>
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="ID_Produit">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let product">{{ product.ID_Produit }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Nom">
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let product">{{ product.Nom }}</td>
+    </ng-container>
+    <ng-container matColumnDef="PrixUnitaire">
+      <th mat-header-cell *matHeaderCellDef>Prix Unitaire</th>
+      <td mat-cell *matCellDef="let product">{{ product.PrixUnitaire }}</td>
+    </ng-container>
+    <ng-container matColumnDef="ID_Fournisseur">
+      <th mat-header-cell *matHeaderCellDef>Fournisseur</th>
+      <td mat-cell *matCellDef="let product">{{ product.ID_Fournisseur }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <!--la pagination-->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+
+  <!-- <table class="table">
   <thead>
     <tr>
       <th scope="col">No.</th>
@@ -23,6 +53,5 @@
       </tr>
     }
   </tbody>
-</table>
-
+</table> -->
 </div>

@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-add-product',
@@ -17,23 +18,23 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogClose,
     ReactiveFormsModule,
     MatCardModule,
+    MatSelectModule
   ],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.scss',
 })
-export class AddProductComponent implements OnInit {
+export class AddProductComponent  {
   dialogRef = inject(MatDialogRef);
   //declarer le formulaire
-  addProductForm!: FormGroup;
   formBuilder = inject(FormBuilder);
-  ngOnInit() {
-    this.addProductForm = this.formBuilder.group({
-      Nom: ['', Validators.required],
-      Description: [''],
-      PrixUnitaire: ['', Validators.required],
-      ID_Fournisseur: [''],
-    });
-  }
+  data = inject(MAT_DIALOG_DATA)
+  
+  addProductForm: FormGroup = this.formBuilder.group({
+    Nom: ['', Validators.required],
+    Description: [''],
+    PrixUnitaire: ['', Validators.required],
+    ID_Fournisseur: [''],
+  });
   
   onSubmit() {
     console.log(this.addProductForm.value);

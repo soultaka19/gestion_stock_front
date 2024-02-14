@@ -41,7 +41,16 @@ export class ProductComponent {
   );
 
   openDialog() {
-    const dialogRef = this.dialog.open(AddProductComponent);
+    const dialogRef = this.dialog.open(
+      AddProductComponent,
+      {
+        data: [
+          {ID_Fournisseur: 1, Nom: 'Fournisseur 1'},
+          {ID_Fournisseur: 2, Nom: 'Fournisseur 2'},
+          {ID_Fournisseur: 3, Nom: 'Fournisseur 3'},
+        ]
+      }
+    );
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${JSON.stringify(result, null, 2)}`);
       this.addProduct(result);
