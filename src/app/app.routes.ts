@@ -9,22 +9,19 @@ export const routes: Routes = [
 
   {
     path: 'login',
-    loadComponent: () =>
-      import('./pages/login/login.component').then((m) => m.LoginComponent),
+    loadComponent: () => import('./pages/login/login.component').then((m) => m.LoginComponent),
   },
   {
     path: 'register',
-    loadComponent: () =>
-      import('./pages/register/register.component').then(
-        (m) => m.RegisterComponent
-      ),
+    loadComponent: () =>import('./pages/register/register.component').then((m) => m.RegisterComponent),
   },
   {
     path: 'dashboard',
     //canActivate: [dasboardGuard],
-    loadChildren: () =>
-      import('./pages/dashboard/dashboard.routes').then(
-        (m) => m.dashboardRoutes
-      ),
+    loadChildren: () => import('./pages/dashboard/dashboard.routes').then((m) => m.dashboardRoutes ),
   },
+  {
+    path: '**',
+    redirectTo: 'dashboard',
+  }
 ];

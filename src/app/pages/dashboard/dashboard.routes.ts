@@ -9,14 +9,10 @@ export const dashboardRoutes : Routes = [
     component: DashboardComponent,
     children: [
       {
-        path: 'profil',
-        loadComponent: () => import('./pages/profil/profil.component').then(m => m.ProfilComponent),
-      },
-      {
         path: 'product',
-        loadChildren: () => import('./pages/product/product.routes').then(m => m.productRoutes),
+        loadComponent: () => import('./pages/product/product.component').then(m => m.ProductComponent),
         providers:[ProductService]
-      }
+      },
     ],
     providers:[SidebarService],
   }

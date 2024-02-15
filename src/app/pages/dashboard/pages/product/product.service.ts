@@ -4,7 +4,6 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Product } from './models/product.model';
 
-
 @Injectable()
 export class ProductService {
   private apiUrl = 'http://localhost/gestion_stock/taf/';
@@ -13,42 +12,42 @@ export class ProductService {
 
   // Create a new product
   createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.apiUrl}produit/add`, product).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .post<Product>(`${this.apiUrl}produit/add`, product)
+      .pipe(catchError(this.handleError));
   }
 
   // Get all products
   getProducts(): Observable<any> {
     return this.http
-      .get<any>(`${this.apiUrl}/produit/get`).pipe(
-        catchError(this.handleError)
-      );
+      .get<any>(`${this.apiUrl}/produit/get`)
+      .pipe(catchError(this.handleError));
   }
 
-
+  // get all fournisseurs
+  getFournisseurs(): Observable<any> {
+    return this.http
+      .get<any>(`${this.apiUrl}/fournisseur/get`)
+      .pipe(catchError(this.handleError));
+  }
 
   getProductById(productId: number): Observable<Product> {
     const url = `${this.apiUrl}/${productId}`;
-    return this.http.get<Product>(url).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.get<Product>(url).pipe(catchError(this.handleError));
   }
 
   // Update a product
   updateProduct(productId: number, product: Product): Observable<Product> {
     const url = `${this.apiUrl}/${productId}`;
-    return this.http.put<Product>(url, product).pipe(
-      catchError(this.handleError)
-    );
+    return this.http
+      .put<Product>(url, product)
+      .pipe(catchError(this.handleError));
   }
 
   // Delete a product
   deleteProduct(productId: number): Observable<any> {
     const url = `${this.apiUrl}/${productId}`;
-    return this.http.delete<any>(url).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.delete<any>(url).pipe(catchError(this.handleError));
   }
 
   // Handle errors
@@ -64,4 +63,3 @@ export class ProductService {
     return throwError(errorMessage);
   }
 }
-

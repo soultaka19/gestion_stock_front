@@ -6,7 +6,8 @@
   </div>
   <!--afficher les produits dans une table bootstrap-->
   <h1>Gestion des produits</h1>
-  <table mat-table [dataSource]="dataSource">
+
+  <table mat-table [dataSource]="dataSource()">
     <ng-container matColumnDef="ID_Produit">
       <th mat-header-cell *matHeaderCellDef>No.</th>
       <td mat-cell *matCellDef="let product">{{ product.ID_Produit }}</td>
@@ -33,25 +34,4 @@
     aria-label="Select page of periodic elements"
   >
   </mat-paginator>
-
-  <!-- <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">No.</th>
-      <th scope="col">Nom</th>
-      <th scope="col">PrixUnitaire</th>
-      <th scope="col">Fournisseur</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (product of products(); track $index) {
-      <tr>
-        <th scope="row">{{$index + 1}}</th>
-        <td>{{ product.Nom }}</td>
-        <td>{{ product.PrixUnitaire }}</td>
-        <td>{{ product.ID_Fournisseur }}</td>
-      </tr>
-    }
-  </tbody>
-</table> -->
 </div>

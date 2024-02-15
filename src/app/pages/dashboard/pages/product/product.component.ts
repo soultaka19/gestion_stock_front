@@ -4,8 +4,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
-import { tap } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { Product } from './models/product.model';
 import { AddProductComponent } from './pages/add-product/add-product.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
@@ -22,6 +23,7 @@ import { ProductService } from './product.service';
     ProductListComponent,
     MatDialogModule,
     AddProductComponent,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
@@ -31,26 +33,29 @@ export class ProductComponent {
   dialog = inject(MatDialog);
   les_produits = signal<Product[]>([]);
 
-  private les_produit$ = toSignal(
+  les_produit$ = toSignal(
     this.productSevice.getProducts().pipe(
       tap((data) => {
         console.log("reponse de l'api produit", data);
         this.les_produits.set(data.data);
-      })
+      }),
+      map((data) => data.data)
+    )
+  );
+
+  les_fournisseurs = toSignal(
+    this.productSevice.getFournisseurs().pipe(
+      tap((data) => {
+        console.log("reponse de l'api fournisseur", data);
+      }),
+      map((data) => data.data)
     )
   );
 
   openDialog() {
-    const dialogRef = this.dialog.open(
-      AddProductComponent,
-      {
-        data: [
-          {ID_Fournisseur: 1, Nom: 'Fournisseur 1'},
-          {ID_Fournisseur: 2, Nom: 'Fournisseur 2'},
-          {ID_Fournisseur: 3, Nom: 'Fournisseur 3'},
-        ]
-      }
-    );
+    const dialogRef = this.dialog.open(AddProductComponent, {
+      data: this.les_fournisseurs()
+    });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${JSON.stringify(result, null, 2)}`);
       this.addProduct(result);
@@ -62,7 +67,11 @@ export class ProductComponent {
     this.productSevice.createProduct(product).subscribe((reponse: any) => {
       if (reponse.status) {
         //mettre a jour la liste des produits
-        this.les_produits.update((ancienneListe) => [...ancienneListe,product])
+        //ajouter le nouveau produit a la liste au debut
+        this.les_produits.update((ancienneListe) => [
+          reponse.data,
+          ...ancienneListe,
+        ]);
         console.log('produit ajouter avec succes', reponse.data);
       } else {
         console.log("erreur lors de l'ajout", reponse);

@@ -5,8 +5,8 @@
       <mat-card class="exemple-card">
         <mat-card-header>
           <mat-card-title>
-              <mat-icon>add_shopping_cart</mat-icon>
-              <span>Nombre de produits</span>
+            <mat-icon>add_shopping_cart</mat-icon>
+            <span>Nombre de produits</span>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
@@ -18,8 +18,8 @@
       <mat-card class="exemple-card">
         <mat-card-header>
           <mat-card-title>
-              <mat-icon>add_shopping_cart</mat-icon>
-              <span>Nombre de produits en stock</span>
+            <mat-icon>add_shopping_cart</mat-icon>
+            <span>Nombre de produits en stock</span>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
@@ -31,8 +31,8 @@
       <mat-card class="exemple-card">
         <mat-card-header>
           <mat-card-title>
-              <mat-icon>add_shopping_cart</mat-icon>
-              <span>Nombre de produits en rupture </span>
+            <mat-icon>add_shopping_cart</mat-icon>
+            <span>Nombre de produits en rupture </span>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
@@ -44,11 +44,13 @@
   <!--mat tabs module-->
   <mat-tab-group animationDuration="0ms" class="mt-3">
     <mat-tab label="Produits">
-      <app-product-list [les_produits]="les_produits()" (addProduct)="openDialog()" />
+      <app-product-list
+        [les_produits]="les_produits()"
+        (addProduct)="openDialog()"
+      />
     </mat-tab>
     <mat-tab label="Entree en Stock">Entree en Stock </mat-tab>
     <mat-tab label="Sortie en stock">Sortie en Stock</mat-tab>
     <mat-tab label="Fournisseur">Fournisseur</mat-tab>
   </mat-tab-group>
-
 </div>
