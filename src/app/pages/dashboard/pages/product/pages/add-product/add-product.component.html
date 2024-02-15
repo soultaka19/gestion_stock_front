@@ -22,9 +22,11 @@
         }
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Ajouter</button>
+    <button class="bouton" mat-raised-button color="primary"  [disabled]="addProductForm.invalid" type="submit">Ajouter</button>
   </form>
-</mat-dialog-content>
+</mat-dialog-content>  
+<!--le bouton close doit s'aligner en bas a droite-->    
+
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
+  <button class="close" mat-button mat-dialog-close>Fermer</button>
 </mat-dialog-actions>

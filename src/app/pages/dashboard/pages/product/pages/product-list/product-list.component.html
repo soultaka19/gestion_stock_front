@@ -1,11 +1,8 @@
-<div class="mat-elevation-z8 mt-3 p-1">
-  <div class="col-md-12 d-flex justify-content-end mr-2">
-    <button mat-raised-button color="primary" (click)="onAddProduct()">
-      Ajouter un produit
-    </button>
+<div class="mat-elevation-z8 mt-5 p-3">
+  <div class="d-flex justify-content-between">
+    <h1 class="h1">Gestion des produits</h1>
+    <button class="add-product-button" mat-stroked-button color="primary"  (click)="onAddProduct()">Ajouter un produit</button>
   </div>
-  <!--afficher les produits dans une table bootstrap-->
-  <h1>Gestion des produits</h1>
 
   <table mat-table [dataSource]="dataSource()">
     <ng-container matColumnDef="ID_Produit">
