@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SidebarService } from '../../services/sidebar.service';
@@ -23,6 +24,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
     NavbarComponent,
     RouterOutlet,
     RouterModule,
+    MatToolbarModule
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',

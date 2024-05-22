@@ -1,15 +1,11 @@
 .sidenav-container {
   height: 100%;
   padding-top: 24px;
-  //padding-left: 10px;
 }
 .sidenav {
-  //padding-left: 10px;
   padding-top: 8pxpx;
   width: 250px;
-  //background-color: #FFBF69;
   background-color: #FF9F1C;
-  //box-shadow: 3px 0 6px rgba(0,0,0,.24);
 
 }
 mat-nav-list{
@@ -37,23 +33,11 @@ mat-nav-list{
   margin-right: 0px;
 
 }
-
-
 .logo {
   width: 100%; /* Le logo occupe toute la largeur du container */
   height: 100%; /* Maintient l'aspect ratio */
   max-width: 100%; /* Prévient le dépassement */
-  //max-height: 76px; /* Hauteur maximale, ajustez selon vos besoins */
 }
 .container{
-  //centrer le contenu se trouvant dans le container
   width: 96%;
-}
-// h1 {
-//   margin-left: 28px;
-//   margin-top: 10px;
-
-// }
-@media (max-width: 768px) { /* Taille d'écran pour tablettes et moins */
-
 }
