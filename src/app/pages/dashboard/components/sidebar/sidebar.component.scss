@@ -15,7 +15,7 @@
 }
 
 h1.example-app-name {
-  margin-left: 8px;
+  margin-left: 18px;
 }
 
 .example-sidenav-container {
@@ -28,4 +28,44 @@ h1.example-app-name {
   /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
      `<body>` to be our scrolling element for mobile layouts. */
   flex: 1 0 auto;
+}
+
+//Default style
+.menu-item {
+  border-left: 5px solid;
+  border-left-color: rgba(0, 0, 0, 0);
+}
+
+//Active style - primary color css variable will be set in theming section
+.selected-menu-item {
+  border-left-color: var(--primary-color);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+
+
+.sidenav-header {
+  padding-top: 24px;
+  text-align: center;
+
+  > img {
+    border-radius: 100%;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  .header-text {
+    height: 3rem;
+
+    > h2 {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    > p {
+      margin: 0;
+      font-size: 0.8rem;
+    }
+  }
 }
