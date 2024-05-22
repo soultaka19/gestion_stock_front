@@ -11,12 +11,4 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent  {
-
-
-  userInfos = inject(AuthService).currentUser.pipe(
-    tap((user) => {
-      console.log('user', user);
-    })
-  ).subscribe();
-  
 }
