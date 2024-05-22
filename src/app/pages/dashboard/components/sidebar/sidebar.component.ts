@@ -1,49 +1,33 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild, inject } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule, RouterOutlet } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { SidebarService } from '../../services/sidebar.service';
-import { NavbarComponent } from '../navbar/navbar.component';
+import { RouterOutlet } from '@angular/router';
 
+/** @title Responsive sidenav */
 @Component({
   selector: 'app-sidebar',
-  standalone: true,
-  imports: [
-    MatSidenavModule,
-    MatListModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatIconModule,
-    MatExpansionModule,
-    NavbarComponent,
-    RouterOutlet,
-    RouterModule,
-    MatToolbarModule
-  ],
-  templateUrl: './sidebar.component.html',
+  templateUrl: 'sidebar.component.html',
   styleUrl: './sidebar.component.scss',
+  standalone: true,
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, MatListModule, RouterOutlet],
 })
-export class SidebarComponent implements AfterViewInit, OnDestroy {
-  @ViewChild('sidenav') sidenav!: MatSidenav;
-  private sidebarService = inject(SidebarService);
-  toggleSubscrition!: Subscription;
+export class SidebarComponent implements OnDestroy {
+  mobileQuery: MediaQueryList;
+  
 
-  ngAfterViewInit(): void {
-    this.toggleSubscrition = this.sidebarService.sidebarToggle$.subscribe((open) => {
-        setTimeout(() => {
-          this.sidenav.opened = open;
-        });
-    });
+  private _mobileQueryListener: () => void;
+
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-
   ngOnDestroy(): void {
-    this.toggleSubscrition.unsubscribe();
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 }

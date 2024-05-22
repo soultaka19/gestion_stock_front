@@ -1,43 +1,31 @@
-.sidenav-container {
-  height: 100%;
-  padding-top: 24px;
-}
-.sidenav {
-  padding-top: 8pxpx;
-  width: 250px;
-  background-color: #FF9F1C;
-
-}
-mat-nav-list{
-  padding-left: 10px;
-}
-
-.active-link {
-  color: #0A58CA;
-}
-.nav-content {
+.example-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.mat-icon {
-  margin-right: 15px; /* Ajustez l'espace selon vos besoins */
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
 }
 
-.logo-container {
-  margin-bottom: 16px; /* Ajustez l'espace selon vos besoins */
-  //definie moi la taille qui va contenir le logo
-  height: 140px;
-  //je veux que le container du logo soit colle au bord gauche
-  margin-left: 0px;
-  margin-right: 0px;
+h1.example-app-name {
+  margin-left: 8px;
+}
 
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
 }
-.logo {
-  width: 100%; /* Le logo occupe toute la largeur du container */
-  height: 100%; /* Maintient l'aspect ratio */
-  max-width: 100%; /* Prévient le dépassement */
-}
-.container{
-  width: 96%;
+
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
 }

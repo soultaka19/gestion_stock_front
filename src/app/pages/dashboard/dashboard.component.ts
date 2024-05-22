@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @Component({
@@ -6,7 +7,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     standalone: true,
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.scss',
-    imports: [SidebarComponent]
+    imports: [SidebarComponent, RouterOutlet]
 })
 export class DashboardComponent  {
 }

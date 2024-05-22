@@ -25,6 +25,7 @@ import { ProductService } from './product.service';
     AddProductComponent,
     MatProgressSpinnerModule,
   ],
+  providers: [ProductService],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })

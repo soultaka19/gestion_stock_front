@@ -1,6 +1,5 @@
 import { Routes } from "@angular/router";
 import { DashboardComponent } from "./dashboard.component";
-import { ProductService } from "./pages/product/product.service";
 import { SidebarService } from "./services/sidebar.service";
 
 export const dashboardRoutes : Routes = [
@@ -11,7 +10,6 @@ export const dashboardRoutes : Routes = [
       {
         path: 'product',
         loadComponent: () => import('./pages/product/product.component').then(m => m.ProductComponent),
-        providers:[ProductService]
       },
     ],
     providers:[SidebarService],
