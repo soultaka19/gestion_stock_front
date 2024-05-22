@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 /** @title Responsive sidenav */
 @Component({
@@ -13,7 +13,9 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: 'sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, MatListModule, RouterOutlet],
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule,
+     MatListModule, RouterOutlet, RouterModule
+  ],
 })
 export class SidebarComponent implements OnDestroy {
   mobileQuery: MediaQueryList;
