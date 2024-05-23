@@ -1,4 +1,5 @@
 import { MediaMatcher } from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, computed, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,15 +21,15 @@ export type MenuItem = {
   styleUrl: './sidebar.component.scss',
   standalone: true,
   imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule,
-     MatListModule, RouterOutlet, RouterModule
+     MatListModule, RouterOutlet, RouterModule, CommonModule
   ],
 })
 
 
 
 export class SidebarComponent implements OnDestroy {
-  mobileQuery: MediaQueryList;
-  
+  mobileQuery: MediaQueryList;  
+
   menuIems = signal<MenuItem[]>([
     {
       libelle: "products",
@@ -51,9 +52,8 @@ export class SidebarComponent implements OnDestroy {
       icon: "person"
     },
   ]);
-
-  collapsed = signal(false);
-  sidenavWidth = computed(() =>(this.collapsed() ? "65px" : "250px" ));
+  collapsed = signal(true);
+  sidenavWidth = computed(() =>(this.collapsed() ? "75px" : "250px" ));
 
   private _mobileQueryListener: () => void;
 
@@ -62,7 +62,6 @@ export class SidebarComponent implements OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
-
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }

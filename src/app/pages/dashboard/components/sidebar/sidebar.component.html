@@ -1,36 +1,55 @@
-  <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-    <mat-toolbar color="primary" class="example-toolbar">
-      <button mat-icon-button (click)="collapsed.set(!collapsed())">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <h1 class="example-app-name ">Responsive App</h1>
-    </mat-toolbar>
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="collapsed.set(!collapsed())">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="example-app-name">Responsive App</h1>
+  </mat-toolbar>
 
-    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-      <mat-sidenav #snav  [style.width]="sidenavWidth()"
-        opened [mode]="mobileQuery.matches && !collapsed() ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+  <mat-sidenav-container
+    class="example-sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      [style.width]="sidenavWidth()"
+      [opened]="true"
+      [mode]="mobileQuery.matches && !collapsed() ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
+      <mat-nav-list >
+        @for (item of menuIems(); track $index) {
+        <a
+          (click)="mobileQuery.matches && !collapsed() ? collapsed.set(!collapsed()) : null"
+          mat-list-item
+          [routerLink]="item.route"
+          class="menu-item"
+          style="margin-left: 12px"
+        >
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <span matListItemTitle>{{ item.libelle }}</span>
+        </a>
+        }
+      </mat-nav-list>
+      <div class="sidenav-header">
+        <mat-divider></mat-divider>
+        <img 
+          [width]="collapsed() ? 65 : 100"
+          [height]="collapsed() ? 65 : 100"
+          src="../../../../../assets/photo.png"
+        />
         @if (!collapsed()) {
-          <div class="sidenav-header">
-            <img [width]="100" [height]="100" src="../../../../../assets/photo.png" />
-            <div class="header-text">
-              <h2>Jant Tech</h2>
-              <p>Souleymane DIALLO</p>
-            </div>
+          <div class="header-text">
+            <h2>Jant Tech</h2>
+            <p>Souleymane DIALLO</p>
           </div>
         }
-        <mat-nav-list>
-          @for (item of menuIems(); track $index) {
-            <a  mat-list-item [routerLink]="item.route" 
-               class="menu-item" style="margin-left: 8px;">
-              <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
-              <span matListItemTitle>{{item.libelle}}</span>
-            </a> 
-          }
-        </mat-nav-list>
-      </mat-sidenav>
+      </div>
+    </mat-sidenav>
 
-      <mat-sidenav-content [style.margin-left]="sidenavWidth()" class="px-1 py-3">
-        <router-outlet></router-outlet>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
+    <mat-sidenav-content [style.margin-left]="sidenavWidth()" class="px-1 py-3">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
