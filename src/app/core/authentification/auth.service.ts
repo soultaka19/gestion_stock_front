@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject, Observable, catchError, switchMap, tap, throwError } from 'rxjs';
-import { Abonnement } from '../core/models/abonnement.model';
-import { Entreprise } from '../core/models/entreprise.model';
-import { Utilisateur } from '../core/models/utilisateur.model';
+import { Abonnement } from '../models/abonnement.model';
+import { Entreprise } from '../models/entreprise.model';
+import { Utilisateur } from '../models/utilisateur.model';
 
 @Injectable({
   providedIn: 'root',

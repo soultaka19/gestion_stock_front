@@ -8,8 +8,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
+import { AuthService } from '../../core/authentification/auth.service';
 import { Entreprise } from '../../core/models/entreprise.model';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
