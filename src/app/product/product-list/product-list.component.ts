@@ -14,8 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { Product } from '../../models/product.model';
 import { AddProductComponent } from '../add-product/add-product.component';
+import { Product } from '../models/product.model';
 
 @Component({
   selector: 'app-product-list',

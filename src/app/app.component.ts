@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, DashboardComponent],
+  imports: [CommonModule, RouterOutlet, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

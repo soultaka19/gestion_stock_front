@@ -1,27 +1,26 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  },
 
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'product'
+  },
+  {
+    path: 'product',
+    loadChildren: () => import('./product/product.routes').then(m => m.ProductRoutes)
+  },
+  {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.component').then((m) => m.LoginComponent),
+    loadComponent: () => import('./login/login.component').then((m) => m.LoginComponent),
   },
   {
     path: 'register',
-    loadComponent: () =>import('./pages/register/register.component').then((m) => m.RegisterComponent),
-  },
-  {
-    path: 'dashboard',
-    //canActivate: [dasboardGuard],
-    loadChildren: () => import('./pages/dashboard/dashboard.routes').then((m) => m.dashboardRoutes ),
+    loadComponent: () =>import('./register/register.component').then((m) => m.RegisterComponent),
   },
   {
     path: '**',
-    redirectTo: 'dashboard',
+    redirectTo: 'product'
   }
 ];

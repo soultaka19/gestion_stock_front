@@ -7,9 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { map, tap } from 'rxjs';
+import { AddProductComponent } from './add-product/add-product.component';
 import { Product } from './models/product.model';
-import { AddProductComponent } from './pages/add-product/add-product.component';
-import { ProductListComponent } from './pages/product-list/product-list.component';
+import { ProductListComponent } from './product-list/product-list.component';
 import { ProductService } from './product.service';
 
 @Component({
