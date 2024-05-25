@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit {
           console.log('Reponse du backend', reponse);
           if (reponse.status) {
             //vider le formulaire
+            this.route.navigate(['/admin']);
             this.loginForm.reset();
-            this.route.navigate(['/dashboard']);
           } else {
             this.incorectIdentifiant = true;
           }

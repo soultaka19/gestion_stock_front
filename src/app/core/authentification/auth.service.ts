@@ -12,7 +12,7 @@ import { Utilisateur } from '../models/utilisateur.model';
 export class AuthService {
   private apiUrl = 'http://localhost/gestion_stock/taf/';
 
-  private token: string | null = null;
+  private token!: string;
 
   private currentUserSubject!: BehaviorSubject<Utilisateur | null>;
   public currentUser!: Observable<Utilisateur | null>;
@@ -82,6 +82,7 @@ export class AuthService {
           if (reponse.status && reponse.data) {
             //stocker le token JWT dans le local storage
             this.token = reponse.data;
+            localStorage.setItem('token', this.token);
 
             //decoder le token JWT pour recuperer les informations de l'utilisateur
             const decodedToken = jwtDecode(reponse.data);
@@ -104,7 +105,7 @@ export class AuthService {
 
   //implementation d'une methode isLogged qui permet de verifier si l'utilisateur est connecte
   isLogged(): boolean {
-    // Ajoutez ici la logique pour vérifier la validité du token si nécessaire
-    return !!this.token;
+
+    return !!localStorage.getItem('token');
   }
 }
