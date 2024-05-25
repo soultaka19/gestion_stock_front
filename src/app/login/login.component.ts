@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -23,21 +23,18 @@ import { AuthService } from '../core/authentification/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-
-  incorectIdentifiant = false;
-
+export class LoginComponent {
   formBuilder = inject(FormBuilder);
   authService = inject(AuthService);
   route = inject(Router);
 
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      Login: ['', [Validators.required, Validators.email]],
-      MotDePasse: ['', Validators.required],
-    });
-  }
+  loginForm: FormGroup = this.formBuilder.group({
+    Login: ['', [Validators.required, Validators.email]],
+    MotDePasse: ['', Validators.required],
+  });
+
+  incorectIdentifiant = false;
+
   onSubmit(): void {
     if (this.loginForm.invalid) {
       return;
@@ -48,8 +45,8 @@ export class LoginComponent implements OnInit {
         (reponse) => {
           console.log('Reponse du backend', reponse);
           if (reponse.status) {
-            //vider le formulaire
             this.route.navigate(['/admin']);
+            localStorage.setItem('token', reponse.data);
             this.loginForm.reset();
           } else {
             this.incorectIdentifiant = true;
