@@ -1,15 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  EventEmitter,
-  OnChanges,
-  Output,
-  SimpleChanges,
-  ViewChild,
-  computed,
-  input
-} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnChanges, Output, SimpleChanges, ViewChild, computed, input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -20,13 +10,7 @@ import { Product } from '../models/product.model';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatButtonModule,
-    AddProductComponent,
-    MatInputModule
+  imports: [ CommonModule, MatTableModule, MatPaginatorModule, MatButtonModule, AddProductComponent, MatInputModule
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss',
@@ -42,8 +26,10 @@ export class ProductListComponent implements AfterViewInit, OnChanges{
     'ID_Produit',
     'Nom',
     'PrixUnitaire',
-    'ID_Fournisseur',
+    'Fournisseur',
   ];
+  //definir le type de displayedColumns du type produit
+  
 
   @Output() addProduct = new EventEmitter<string>();
 
