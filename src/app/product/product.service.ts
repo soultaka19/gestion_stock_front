@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Product } from './models/product.model';
+import { Product, ProductResponse } from './models/product.model';
 
 @Injectable()
 export class ProductService {
@@ -18,10 +18,8 @@ export class ProductService {
   }
 
   // Get all products
-  getProducts(): Observable<any> {
-    return this.http
-      .get<any>(`${this.apiUrl}/produit/get`)
-      .pipe(catchError(this.handleError));
+  getProducts(): Observable<ProductResponse> {
+    return this.http.get<ProductResponse>(`${this.apiUrl}/produit/get`);
   }
 
   // get all fournisseurs
@@ -51,7 +49,7 @@ export class ProductService {
   }
 
   // Handle errors
-  private handleError(error: HttpErrorResponse) {
+   handleError(error: HttpErrorResponse) {
     let errorMessage = 'An error occurred';
     if (error.error instanceof ErrorEvent) {
       // Client-side error

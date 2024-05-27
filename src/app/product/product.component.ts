@@ -6,7 +6,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
-import { map, tap } from 'rxjs';
+import { catchError, map, tap } from 'rxjs';
 import { AddProductComponent } from './add-product/add-product.component';
 import { Product } from './models/product.model';
 import { ProductListComponent } from './product-list/product-list.component';
@@ -40,7 +40,8 @@ export class ProductComponent {
         console.log("reponse de l'api produit", data);
         this.les_produits.set(data.data);
       }),
-      map((data) => data.data)
+      map((data) => data.data),
+      catchError((error) => this.productSevice.handleError(error))
     )
   );
 
