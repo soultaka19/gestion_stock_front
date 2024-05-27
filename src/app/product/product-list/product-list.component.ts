@@ -5,7 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { AddProductComponent } from '../add-product/add-product.component';
-import { Product } from '../models/product.model';
+import { Produit } from '../models/product.model';
 
 @Component({
   selector: 'app-product-list',
@@ -16,11 +16,11 @@ import { Product } from '../models/product.model';
   styleUrl: './product-list.component.scss',
 })
 export class ProductListComponent implements AfterViewInit, OnChanges{
-  products = input.required<Product[]>({ alias: 'les_produits' });
+  products = input.required<Produit[]>({ alias: 'les_produits' });
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  dataSource = computed(() => new MatTableDataSource<Product>(this.products()));
+  dataSource = computed(() => new MatTableDataSource<Produit>(this.products()));
 
   displayedColumns: string[] = [
     'ID_Produit',

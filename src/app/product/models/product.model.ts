@@ -1,19 +1,11 @@
-export interface Product {
-  ID_Produit? : number;
-  Nom: string;
-  Description?: string;
-  PrixUnitaire?: number;
-  ID_Fournisseur: number;
-}
-
 export interface ProductResponse {
-  data: Product[];
+  data: Produit[];
   status: boolean;
 }
 
 
 export interface Produit {
-  ID_Produit:   string;
+  ID_Produit?:   string;
   PrixUnitaire: number;
   Description:  string;
   Nom:          string;

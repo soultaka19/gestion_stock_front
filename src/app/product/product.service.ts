@@ -1,27 +1,64 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Product, ProductResponse } from './models/product.model';
-
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { ProductResponse, Produit } from './models/product.model';
 @Injectable()
 export class ProductService {
   private apiUrl = 'http://localhost/gestion_stock/taf/';
 
-  constructor(private http: HttpClient) {}
+  private produits$_: BehaviorSubject<Produit[]> = new BehaviorSubject<Produit[]>([]);
+
+  private loading$_ = new BehaviorSubject<boolean>(false);
+
+  http = inject(HttpClient);
+
+  get produits$(): Observable<Produit[]> {
+    return this.produits$_.asObservable();
+  }
+
+  get loading$(): Observable<boolean> {
+    return this.loading$_;
+  }
+
+  private setLoading(loading: boolean) {
+    this.loading$_.next(loading);
+  }
+
+  getProductsFromApi() : void {
+    this.setLoading(true);
+    this.http.get<ProductResponse>(`${this.apiUrl}/produit/get`)
+      .pipe(
+        tap((products) => {
+          console.log("produits : ", products.data);
+          this.produits$_.next(products.data);
+          this.setLoading(false);
+        }),
+        catchError(this.handleError)
+    ).subscribe();
+  }
+
+
+  addProduit(produit: Produit): void {
+    //ajouter le produit a la liste 
+    console.log("produit : ", produit);
+    this.http
+      .post<ProductResponse>(`${this.apiUrl}produit/add`, produit)
+      .pipe(
+        tap((products) => {
+          console.log("produits : ", products.data);
+          this.produits$_.next([...this.produits$_.getValue(), produit]);
+        }),
+        catchError(this.handleError)
+      )
+      .subscribe();
+  }
+
 
   // Create a new product
-  createProduct(product: Product): Observable<Product> {
-    return this.http
-      .post<Product>(`${this.apiUrl}produit/add`, product)
-      .pipe(catchError(this.handleError));
+  createProduct(produit: Produit): Observable<ProductResponse> {
+    return this.http.post<ProductResponse>(`${this.apiUrl}produit/add`, produit)
   }
-
-  // Get all products
-  getProducts(): Observable<ProductResponse> {
-    return this.http.get<ProductResponse>(`${this.apiUrl}/produit/get`);
-  }
-
   // get all fournisseurs
   getFournisseurs(): Observable<any> {
     return this.http
@@ -29,25 +66,7 @@ export class ProductService {
       .pipe(catchError(this.handleError));
   }
 
-  getProductById(productId: number): Observable<Product> {
-    const url = `${this.apiUrl}/${productId}`;
-    return this.http.get<Product>(url).pipe(catchError(this.handleError));
-  }
-
-  // Update a product
-  updateProduct(productId: number, product: Product): Observable<Product> {
-    const url = `${this.apiUrl}/${productId}`;
-    return this.http
-      .put<Product>(url, product)
-      .pipe(catchError(this.handleError));
-  }
-
-  // Delete a product
-  deleteProduct(productId: number): Observable<any> {
-    const url = `${this.apiUrl}/${productId}`;
-    return this.http.delete<any>(url).pipe(catchError(this.handleError));
-  }
-
+ 
   // Handle errors
    handleError(error: HttpErrorResponse) {
     let errorMessage = 'An error occurred';

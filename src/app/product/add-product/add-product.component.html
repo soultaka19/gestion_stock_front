@@ -17,7 +17,7 @@
     <mat-form-field appearance="fill">
       <mat-label>ID Fournisseur</mat-label>
       <mat-select formControlName="ID_Fournisseur">
-        @for (item of data; track $index) {
+        @for (item of Fournisseurs; track $index) {
           <mat-option value="{{item.ID_Fournisseur}}">{{item.Nom}}</mat-option>
         }
       </mat-select>
