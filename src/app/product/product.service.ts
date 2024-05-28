@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ProductResponse, Produit } from './models/product.model';
+
 @Injectable()
 export class ProductService {
   private apiUrl = 'http://localhost/gestion_stock/taf/';

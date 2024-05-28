@@ -1,40 +1,48 @@
-<div class="mat-elevation-z8 mt-5 p-3">
-  <div class="d-flex justify-content-between">
-    <h2 class="fs-5 fs-lg-1 fs-md-2">Gestion des produits</h2>
-    <button class="add-product-button" mat-stroked-button color="primary"  (click)="onAddProduct()">Nouveau</button>
-  </div>
-
-  <table mat-table [dataSource]="dataSource()">
-
-    <ng-container matColumnDef="ID_Produit">
-      <th mat-header-cell *matHeaderCellDef>No.</th>
-      <td mat-cell *matCellDef="let product">{{ product.ID_Produit }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="Nom">
-      <th mat-header-cell *matHeaderCellDef>Nom</th>
-      <td mat-cell *matCellDef="let product">{{ product.Nom }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="PrixUnitaire">
-      <th mat-header-cell *matHeaderCellDef>Prix Unitaire</th>
-      <td mat-cell *matCellDef="let product">{{ product.PrixUnitaire }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="Fournisseur">
-      <th mat-header-cell *matHeaderCellDef>Fournisseur</th>
-      <td mat-cell *matCellDef="let product">{{ product.Fournisseur.NomFournisseur }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-  </table>
-  <!--la pagination-->
-  <mat-paginator
-    [pageSizeOptions]="[5, 10, 20]"
-    showFirstLastButtons
-    aria-label="Select page of periodic elements"
+<div class="card mt-3">
+  <p-table 
+    [value]="products()" 
+    [paginator]="true"
+    [rows]="5"
+    [rowsPerPageOptions]="[5,10,20]"
+    [tableStyle]="{'min-width': '50rem'}"
   >
-  </mat-paginator>
+    <ng-template pTemplate="caption">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="m-0">Liste des produits</h2>
+        <p-button icon="pi pi-plus" label="Nouveau" />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" >
+        <tr>
+            <th>Code</th>
+            <th>Designation </th>
+            <th>Prix</th>
+            <th>Categorie</th>
+            <th>Quantity</th>
+            <th>Status</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product >
+        <tr>
+            <td>
+                {{"P-001"+product.ID_Produit}}
+            </td>
+            <td>
+                {{product.Nom}}
+            </td>
+            <td>
+                {{product.PrixUnitaire | currency:'USD'}}
+            </td>
+            <td>
+                {{product.Fournisseur.NomFournisseur}}
+            </td>
+            <td>
+                {{product.ID_Produit}}
+            </td>
+            <td>
+                <p-tag [value]="'INSTOCK'" [severity]="getSeverity('INSTOCK')" />
+            </td>
+        </tr>
+    </ng-template>
+  </p-table>
 </div>

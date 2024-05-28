@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Signal, inject } from '@angular/core';
+import { Component, OnInit, Signal, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -29,7 +29,7 @@ import { ProductService } from './product.service';
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit {
   productSevice = inject(ProductService);
 
   produits$: Observable<Produit[]> = this.productSevice.produits$;
@@ -37,5 +37,9 @@ export class ProductComponent {
   loading$: Observable<boolean> = this.productSevice.loading$;
 
   les_produits : Signal<Produit[]> = toSignal(this.produits$, {initialValue: []});
+
+  ngOnInit(): void {
+    this.productSevice.getProductsFromApi();
+  }
 
 }
