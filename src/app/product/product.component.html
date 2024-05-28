@@ -1,53 +1,78 @@
 <div class="container-fluid">
-  <h1>Gestion des produits</h1>
-  <div class="row">
-    <div class="col-12 col-lg-4 col-md-4 col-sm-12 gy-3">
-      <mat-card class="exemple-card">
-        <mat-card-header>
-          <mat-card-title>
-            <mat-icon>add_shopping_cart</mat-icon>
-            <span>Nombre de produits</span>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>200</p>
-        </mat-card-content>
-      </mat-card>
+
+  <div class="bg-light px-4  md:px-6 lg:px-8">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+            <div class="card shadow-sm p-3 rounded">
+                <div class="d-flex justify-content-between mb-3">
+                    <div>
+                        <span class="d-block text-secondary fw-medium mb-3">Orders</span>
+                        <div class="text-dark fw-medium fs-4">152</div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded" style="width:2.5rem;height:2.5rem">
+                      <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
+                    </div>
+                </div>
+                <span class="text-success fw-medium">24 new </span>
+                <span class="text-secondary">since last visit</span>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+            <div class="card shadow-sm p-3 rounded">
+                <div class="d-flex justify-content-between mb-3">
+                    <div>
+                        <span class="d-block text-secondary fw-medium mb-3">Revenue</span>
+                        <div class="text-dark fw-medium fs-4">$2.100</div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center bg-warning bg-opacity-10 rounded" style="width:2.5rem;height:2.5rem">
+                        <i class="pi pi-map-marker text-orange-500 text-xl"></i>
+                    </div>
+                </div>
+                <span class="text-success fw-medium">%52+ </span>
+                <span class="text-secondary">since last week</span>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+            <div class="card shadow-sm p-3 rounded">
+                <div class="d-flex justify-content-between mb-3">
+                    <div>
+                        <span class="d-block text-secondary fw-medium mb-3">Customers</span>
+                        <div class="text-dark fw-medium fs-4">28441</div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center bg-info bg-opacity-10 rounded" style="width:2.5rem;height:2.5rem">
+                        <i class="bi bi-envelope-fill text-info fs-4"></i>
+                        <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+                    </div>
+                </div>
+                <span class="text-success fw-medium">520  </span>
+                <span class="text-secondary">newly registered</span>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 mb-2">
+            <div class="card shadow-sm p-3 rounded">
+                <div class="d-flex justify-content-between mb-3">
+                    <div>
+                        <span class="d-block text-secondary fw-medium mb-3">Comments</span>
+                        <div class="text-dark fw-medium fs-4">152 Unread</div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center bg-purple bg-opacity-10 rounded" style="width:2.5rem;height:2.5rem">
+                      <i class="pi pi-comment text-purple-500 text-xl"></i>
+                    </div>
+                </div>
+                <span class="text-success fw-medium">85 </span>
+                <span class="text-secondary">responded</span>
+            </div>
+        </div>
     </div>
-    <div class="col-12 col-lg-4 col-md-3 col-sm-12 gy-3">
-      <mat-card class="exemple-card">
-        <mat-card-header>
-          <mat-card-title>
-            <mat-icon>add_shopping_cart</mat-icon>
-            <span>Nombre de produits </span>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>150</p>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div class="col-12-4 col-lg-4 col-md-3 col-sm-12 gy-3">
-      <mat-card class="exemple-card">
-        <mat-card-header>
-          <mat-card-title>
-            <mat-icon>add_shopping_cart</mat-icon>
-            <span>Nombre de produits </span>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>50</p>
-        </mat-card-content>
-      </mat-card>
-    </div>
+    <app-product-list [products]="les_produits()"  />
   </div>
+  
   <!--mat tabs module-->
-  <mat-tab-group animationDuration="0ms" class="mt-3">
+  <!-- <mat-tab-group animationDuration="0ms" class="mt-3">
     <mat-tab label="Produits">
-      <app-product-list [products]="les_produits()"  />
     </mat-tab>
     <mat-tab label="Entree en Stock">Entree en Stock </mat-tab>
     <mat-tab label="Sortie en stock">Sortie en Stock</mat-tab>
     <mat-tab label="Fournisseur">Fournisseur</mat-tab>
-  </mat-tab-group>
+  </mat-tab-group> -->
 </div>
